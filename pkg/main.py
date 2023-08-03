@@ -8,7 +8,8 @@ def get_pylint_score(filepath):
 
     # pylint_cmd = f"pylint --rcfile={rcfile} --score_threshold={score_threshold} {' '.join(args)}"
     # pylint_cmd = f"pylint {' '.join(args)}"
-    pylint_cmd = f"pylint --rcfile={rcfile} --score_threshold={score_threshold} {filepath}"
+    pylint_cmd = f"pylint --rcfile={rcfile} {filepath}"
+    # pylint_cmd = f"pylint {rcfile} {score_threshold} {filepath}"
     process = subprocess.Popen(pylint_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     stdout, stderr = process.communicate()
 
@@ -46,6 +47,10 @@ def main():
     file_paths = args.file_paths
     score_threshold = args.score_threshold
     rcfile = args.rcfile
+
+    # print (score_threshold)
+    # print (rcfile)
+    # print (file_paths)
 
     for file_path in file_paths:
         if not os.path.isfile(file_path):
