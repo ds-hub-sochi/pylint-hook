@@ -1,0 +1,5 @@
+- id: pylint-hook
+  name: pylint-hook
+  description: A Git hook that works based on Pylint evaluation
+  entry: pkg
+  language: python
