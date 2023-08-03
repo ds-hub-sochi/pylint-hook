@@ -8,7 +8,7 @@ def get_pylint_score(filepath):
 
     # pylint_cmd = f"pylint --rcfile={rcfile} --score_threshold={score_threshold} {' '.join(args)}"
     # pylint_cmd = f"pylint {' '.join(args)}"
-    pylint_cmd = f"pylint {filepath}"
+    pylint_cmd = f"pylint --rcfile={rcfile} --score_threshold={score_threshold} {filepath}"
     process = subprocess.Popen(pylint_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     stdout, stderr = process.communicate()
 
@@ -37,15 +37,15 @@ def main():
 
     parser = argparse.ArgumentParser(description='Run Pylint on files in a folder and print scores.')
     parser.add_argument('file_paths', nargs='+', help='Path to the file to be checked with Pylint.')
-    # parser.add_argument('--score_threshold', type=float, default=8.0, help='Score threshold for failing the check.')
-    # parser.add_argument('--rcfile', default='', help='Path to the custom .pylintrc')
+    parser.add_argument('--score_threshold', type=float, default=8.0, help='Score threshold for failing the check.')
+    parser.add_argument('--rcfile', default='', help='Path to the custom .pylintrc')
 
-    global score_threshold
+    global score_threshold, rcfile
     score_threshold = 8.0
     args = parser.parse_args()
     file_paths = args.file_paths
-    # score_threshold = args.score_threshold
-    # rcfile = args.rcfile
+    score_threshold = args.score_threshold
+    rcfile = args.rcfile
 
     for file_path in file_paths:
         if not os.path.isfile(file_path):
