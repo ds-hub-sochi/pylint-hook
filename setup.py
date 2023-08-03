@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pylint-hook',
-    version='1.1.1',
+    version='2.0.0',
     description='A Git hook that works based on Pylint evaluation',
     author='Alla Makhotka',
     author_email='all.mahotka2012@yandex.ru',
