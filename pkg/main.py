@@ -3,13 +3,8 @@ import re
 import subprocess
 import argparse
 
-def get_pylint_score(filepath):
-    # args = [filepath]
-
-    # pylint_cmd = f"pylint --rcfile={rcfile} --score_threshold={score_threshold} {' '.join(args)}"
-    # pylint_cmd = f"pylint {' '.join(args)}"
+def get_pylint_score(filepath, score_threshold, rcfile):
     pylint_cmd = f"pylint --rcfile={rcfile} {filepath}"
-    # pylint_cmd = f"pylint {rcfile} {score_threshold} {filepath}"
     process = subprocess.Popen(pylint_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     stdout, stderr = process.communicate()
 
@@ -41,16 +36,10 @@ def main():
     parser.add_argument('--score_threshold', type=float, default=8.0, help='Score threshold for failing the check.')
     parser.add_argument('--rcfile', default='', help='Path to the custom .pylintrc')
 
-    global score_threshold, rcfile
-    score_threshold = 8.0
     args = parser.parse_args()
     file_paths = args.file_paths
     score_threshold = args.score_threshold
     rcfile = args.rcfile
-
-    # print (score_threshold)
-    # print (rcfile)
-    # print (file_paths)
 
     for file_path in file_paths:
         if not os.path.isfile(file_path):
@@ -62,7 +51,7 @@ def main():
             continue
 
         # We pass the function through the files .py
-        score = get_pylint_score(file_path)
+        score = get_pylint_score(file_path, score_threshold, rcfile)
         if score is not None and score < score_threshold:
             exit_code = 1
 
