@@ -45,6 +45,6 @@ repos:
         types: [python]
         args:
           - "--score_threshold=7.0" # пороговое значение pylint
-          - "--rcfile=.pylintrc" # добавляет кастомный конфиг pylint
+          - "--rcfile=.pylintrc" # путь к кастомному конфигу pylint, без него работает с дефолтным конфигом
 
 ```
