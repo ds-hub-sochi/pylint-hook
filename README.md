@@ -46,5 +46,6 @@ repos:
         args:
           - "--score_threshold=7.0" # пороговое значение pylint
           - "--rcfile=.pylintrc" # путь к кастомному конфигу pylint, без него работает с дефолтным конфигом
+        additional_dependencies: [open-metric-learning==0.4.4] # если возникает ошибка unable to import
 
 ```
